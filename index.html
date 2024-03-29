@@ -1,100 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Page Title -->
     <title>Stargazing Conditions</title>
     <!-- Favicon -->
-    <link rel="icon" href="assets/favicon.png">
+    <link rel="icon" href="assets/favicon.png" />
     <!--Background Image-->
     <style>
-        body {
-            background-image: url("assets/background-home-desktop.jpg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-          }
-        </style>
+      .Forecast {
+        background-image: url("assets/background-home-desktop.jpg");
+        background-size: cover;
+        background-position-x: center;
+      }
+      @media screen and (max-width: 750px) {
+        .Forecast {
+          background-image: url("assets/background-home-mobile.jpg");
+        }
+      }
+      .Forecast-2 {
+        background-color: #080b10;
+      }
+    </style>
     <!-- Styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body onload="defaultWeather()">
-    <!-- Displays data for london on page load -->
-
+  <body onload="defaultWeather()">
     <!-- Page Contents -->
     <section class="Forecast">
-        <!-- City Search -->
-        <div class="search">
-            <input type="text" id="search-input" class="search-input" placeholder="Enter a location..." />
-            <button onclick="fetchWeather()" id="search-button" class="search-btn">Search</button>
+      <!-- City Search -->
+      <div class="search">
+        <input
+          type="text"
+          onchange="fetchWeather()"
+          id="search-input"
+          class="search-input"
+          placeholder="&#128269;  Enter a location..."
+        />
+
+        <button id="search-button" class="search-btn">?</button>
+      </div>
+
+      <!-- TONIGHT SUMMARY -->
+      <div id="Geolocation">
+        <div class="main-summary">
+          <br />
+          <h2>TONIGHT</h2>
+          <h3 class="myDate">JUNE 23, 2024</h3>
+          <h4 class="city"></h4>
+          <h4>OVERALL CONDITIONS: W.I.P</h4>
+
+          <p class="min"></p>
+          <p class="max"></p>
+          <!-- <p class="eve"></p>
+          <p class="night"></p> -->
+
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
         </div>
-        <!-- Current Weather -->
-        <div class="current-weather">
-            <br>
-            <h3>Current Weather:</h3>
-            <br>
-            <button class="current-weather-btn">
-                <img style="width:100%" class=" writeIcon">
-                <h4 class=" city">Loading</h4>
-                <h3 class="description">Failed to Load</h3>
-                <h3 class="temp">Failed to Load</h3>
-                <p class="temp_range">Failed to Load</p>
-                <p class="speed">Failed to Load</p>
-                <p class="clouds">Failed to Load</p>
-            </button>
-            <br>
+        <div class="tonight-forecast">
+          <div>
+            <p>TIME</p>
+            <img />
+            <p>rating</p>
+          </div>
+          <div>
+            <p>TIME</p>
+            <img />
+            <p>rating</p>
+          </div>
+          <div>
+            <p>TIME</p>
+            <img />
+            <p>rating</p>
+          </div>
         </div>
-        <!-- Weather Forecast -->
-        <div class="forecast-row">
-            <button class="forecast-weather-btn">
-                <img class="forecastIcon1">
-                <h4 class="max1">Failed</h4>
-                <p class="min1">Failed</p>
+      </div>
 
-                <button class="forecast-weather-btn">
-                    <img class="forecastIcon2">
-                    <h4 class="max2">Failed</h4>
-                    <p class="min2">Failed</p>
-                </button>
-                <button class="forecast-weather-btn">
-                    <img class="forecastIcon3">
-                    <h4 class="max3">Failed</h4>
-                    <p class="min3">Failed</p>
-                </button>
-                <button class="forecast-weather-btn">
-                    <img class="forecastIcon4">
-                    <h4 class="max4">Failed</h4>
-                    <p class="min4">Failed</p>
-                </button>
-                <button class="forecast-weather-btn">
-                    <img class="forecastIcon5">
-                    <h4 class="max5">Failed</h4>
-                    <p class="min5">Failed</p>
-                </button>
-                <button class="forecast-weather-btn">
-                    <img class="forecastIcon6">
-                    <h4 class="max6">Failed</h4>
-                    <p class="min6">Failed</p>
-                </button>
-        </div>
-
-
-
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </section>
-    <br><br>
+    <section class="Forecast-2">
+      <!-- Weather Forecast -->
+      <div class="forecast-row">
+        <button class="forecast-weather-btn1">
+          <img class="forecastIcon1" />
+          <h4 class="max1">Failed</h4>
+          <p class="min1">Failed</p>
+        </button>
+        <button class="current-weather-btn1">
+          <h2>MONDAY NIGHT</h2>
+          <h3>JUNE 23, 2024</h3>
+          <h4 class="city">Loading</h4>
+          <h3 class="description">Failed to Load</h3>
+          <h4>OVERALL CONDITIONS: W.I.P</h4>
+          <img style="width: 100%" class="writeIcon" />
+
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
+          <p>Best Time For Stargazing:</p>
+        </button>
+
+        <button class="forecast-weather-btn2">
+          <img class="forecastIcon2" />
+          <h4 class="max2">Failed</h4>
+          <p class="min2">Failed</p>
+        </button>
+
+        <button class="forecast-weather-btn3">
+          <img class="forecastIcon3" />
+          <h4 class="max3">Failed</h4>
+          <p class="min3">Failed</p>
+        </button>
+
+        <span>&#x25BC;</span>
+        <span>&#x25B2;</span>
+
+        <button class="forecast-weather-btn4">
+          <img class="forecastIcon4" />
+          <h4 class="max4">Failed</h4>
+          <p class="min4">Failed</p>
+        </button>
+
+        <button class="forecast-weather-btn5">
+          <img class="forecastIcon5" />
+          <h4 class="max5">Failed</h4>
+          <p class="min5">Failed</p>
+        </button>
+
+        <button class="forecast-weather-btn6">
+          <img class="forecastIcon6" />
+          <h4 class="max6">Failed</h4>
+          <p class="min6">Failed</p>
+        </button>
+      </div>
+    </section>
+
     <script src="js/weather.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".forecast-weather-btn1").click(function () {
+          $(".forecast-weather-btn1").toggle();
+          $(".current-weather-btn1").toggle();
+        });
+      });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+      $(document).ready(function () {
+        $(".current-weather-btn1").click(function () {
+          $(".forecast-weather-btn1").toggle();
+          $(".current-weather-btn1").toggle();
+        });
+      });
 
+      $(document).ready(function () {
+        $(".forecast-weather-btn2").click(function () {
+          $(".forecast-weather-btn2").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".current-weather-btn2").click(function () {
+          $(".forecast-weather-btn2").toggle();
+          $(".current-weather-btn2").toggle();
+        });
+      });
 
+      $(document).ready(function () {
+        $(".forecast-weather-btn3").click(function () {
+          $(".forecast-weather-btn3").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".current-weather-btn3").click(function () {
+          $(".forecast-weather-btn3").toggle();
+          $(".current-weather-btn3").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".forecast-weather-btn4").click(function () {
+          $(".forecast-weather-btn4").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".current-weather-btn4").click(function () {
+          $(".forecast-weather-btn4").toggle();
+          $(".current-weather-btn4").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".forecast-weather-btn5").click(function () {
+          $(".forecast-weather-btn5").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".current-weather-btn5").click(function () {
+          $(".forecast-weather-btn5").toggle();
+          $(".current-weather-btn5").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".forecast-weather-btn6").click(function () {
+          $(".forecast-weather-btn6").toggle();
+        });
+      });
+      $(document).ready(function () {
+        $(".current-weather-btn6").click(function () {
+          $(".forecast-weather-btn6").toggle();
+          $(".current-weather-btn6").toggle();
+        });
+      });
+    </script>
+  </body>
 </html>
