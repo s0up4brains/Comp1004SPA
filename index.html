@@ -12,12 +12,15 @@
     <style>
       .Forecast {
         background-image: url("assets/background-home-desktop.jpg");
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
         background-position-x: center;
+        background-color: #080b10;
       }
       @media screen and (max-width: 750px) {
         .Forecast {
           background-image: url("assets/background-home-mobile.jpg");
+          background-size: cover;
         }
       }
       .Forecast-2 {
@@ -32,6 +35,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,10 +45,27 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellefair&family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bellefair&family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bellefair&family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body onload="defaultWeather()">
+  <body onload="defaultWeather(), bookmarkLoad()">
     <!-- Page Contents -->
+
     <section class="Forecast">
       <!-- City Search -->
       <div class="search">
@@ -57,67 +79,281 @@
 
         <button id="search-button" class="search-btn">?</button>
       </div>
+      <div>
+        <button onclick="bookmarkAdd(), bookmarkLoad()" id="bookmark">
+          Bookmark
+        </button>
+        <h5>Saved Locations:</h5>
+        <div id="bookmark-out"></div>
+      </div>
 
       <!-- TONIGHT SUMMARY -->
-      <div id="Geolocation">
+
+      <div>
         <div class="main-summary">
-          <br />
-          <h2>TONIGHT</h2>
-          <h3 class="myDate">JUNE 23, 2024</h3>
-          <h4 class="city"></h4>
-          <h4>OVERALL CONDITIONS: W.I.P</h4>
-
-          <p class="min"></p>
-          <p class="max"></p>
-          <!-- <p class="eve"></p>
-          <p class="night"></p> -->
-
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
+          <h2 id="">TONIGHT</h2>
+          <!--Geolocation PopUP-->
+          <div class="popup" id="Geolocation"></div>
+          <h2 class="myDate"></h2>
+          <h4 id="bookmark-add" class="city"></h4>
+          <h4 class="description"></h4>
+          <h4 class="quality"></h4>
+          <h5 class="clouds"></h5>
+          <h5>Moon Phase:</h5>
+          <h5 class="sunset"></h5>
         </div>
-        <div class="tonight-forecast">
-          <div>
-            <p>TIME</p>
-            <img />
-            <p>rating</p>
+
+        <button class="forecast-weather-btn0"></button>
+
+        <button class="current-weather-btn0">
+          <div class="tonight-forecast">
+            <!-- <p class="current-description"></p> -->
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
           </div>
-          <div>
-            <p>TIME</p>
-            <img />
-            <p>rating</p>
-          </div>
-          <div>
-            <p>TIME</p>
-            <img />
-            <p>rating</p>
-          </div>
-        </div>
+        </button>
       </div>
 
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </section>
+
     <section class="Forecast-2">
       <!-- Weather Forecast -->
       <div class="forecast-row">
         <button class="forecast-weather-btn1">
-          <img class="forecastIcon1" />
           <h4 class="max1">Failed</h4>
           <p class="min1">Failed</p>
         </button>
-        <button class="current-weather-btn1">
-          <h2>MONDAY NIGHT</h2>
-          <h3>JUNE 23, 2024</h3>
-          <h4 class="city">Loading</h4>
-          <h3 class="description">Failed to Load</h3>
-          <h4>OVERALL CONDITIONS: W.I.P</h4>
-          <img style="width: 100%" class="writeIcon" />
 
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
-          <p>Best Time For Stargazing:</p>
+        <button class="current-weather-btn1">
+          <div class="main-summary">
+            <h2 class="myDate">Loading...</h2>
+            <h4 class="city"></h4>
+            <h4 class="description"></h4>
+            <h4>OVERALL CONDITIONS: W.I.P</h4>
+            <h5 class="clouds"></h5>
+            <h5>Moon Phase:</h5>
+            <h5 class="sunset"></h5>
+          </div>
+          <div class="tonight-forecast">
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+          </div>
         </button>
 
         <button class="forecast-weather-btn2">
@@ -125,37 +361,262 @@
           <h4 class="max2">Failed</h4>
           <p class="min2">Failed</p>
         </button>
+        <button class="current-weather-btn2">
+          <div class="main-summary">
+            <h2 class="myDate">Loading...</h2>
+            <h4 class="city"></h4>
+            <h4 class="description"></h4>
+            <h4>OVERALL CONDITIONS: W.I.P</h4>
+            <h5>Best Time For Stargazing:</h5>
+            <h5 class="clouds"></h5>
+            <h5>Moon Phase:</h5>
+            <h5 class="sunset"></h5>
+          </div>
+          <div class="tonight-forecast">
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
 
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+          </div>
+        </button>
         <button class="forecast-weather-btn3">
           <img class="forecastIcon3" />
           <h4 class="max3">Failed</h4>
           <p class="min3">Failed</p>
         </button>
+        <button class="current-weather-btn3">
+          <div class="main-summary">
+            <h2 class="myDate">Loading...</h2>
+            <h4 class="city"></h4>
+            <h4 class="description"></h4>
+            <h4>OVERALL CONDITIONS: W.I.P</h4>
+            <h5>Best Time For Stargazing:</h5>
+            <h5 class="clouds"></h5>
+            <h5>Moon Phase:</h5>
+            <h5 class="sunset"></h5>
+          </div>
+          <div class="tonight-forecast">
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
 
-        <span>&#x25BC;</span>
-        <span>&#x25B2;</span>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
 
-        <button class="forecast-weather-btn4">
-          <img class="forecastIcon4" />
-          <h4 class="max4">Failed</h4>
-          <p class="min4">Failed</p>
-        </button>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
 
-        <button class="forecast-weather-btn5">
-          <img class="forecastIcon5" />
-          <h4 class="max5">Failed</h4>
-          <p class="min5">Failed</p>
-        </button>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
 
-        <button class="forecast-weather-btn6">
-          <img class="forecastIcon6" />
-          <h4 class="max6">Failed</h4>
-          <p class="min6">Failed</p>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+            <div class="forecast-container">
+              <p class="forecast-time"></p>
+              <img class="forecast-icon" />
+              <p class="forecast-clouds"></p>
+            </div>
+          </div>
         </button>
       </div>
     </section>
 
     <script src="js/weather.js"></script>
+    <script src="js/bookmark.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
@@ -163,6 +624,20 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+      $(document).ready(function () {
+        $(".forecast-weather-btn0").click(function () {
+          $(".forecast-weather-btn0").toggle();
+          $(".current-weather-btn0").toggle();
+        });
+      });
+
+      $(document).ready(function () {
+        $(".current-weather-btn0").click(function () {
+          $(".forecast-weather-btn0").toggle();
+          $(".current-weather-btn0").toggle();
+        });
+      });
+
       $(document).ready(function () {
         $(".forecast-weather-btn1").click(function () {
           $(".forecast-weather-btn1").toggle();
@@ -180,8 +655,10 @@
       $(document).ready(function () {
         $(".forecast-weather-btn2").click(function () {
           $(".forecast-weather-btn2").toggle();
+          $(".current-weather-btn2").toggle();
         });
       });
+
       $(document).ready(function () {
         $(".current-weather-btn2").click(function () {
           $(".forecast-weather-btn2").toggle();
@@ -192,45 +669,14 @@
       $(document).ready(function () {
         $(".forecast-weather-btn3").click(function () {
           $(".forecast-weather-btn3").toggle();
+          $(".current-weather-btn3").toggle();
         });
       });
+
       $(document).ready(function () {
         $(".current-weather-btn3").click(function () {
           $(".forecast-weather-btn3").toggle();
           $(".current-weather-btn3").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".forecast-weather-btn4").click(function () {
-          $(".forecast-weather-btn4").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".current-weather-btn4").click(function () {
-          $(".forecast-weather-btn4").toggle();
-          $(".current-weather-btn4").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".forecast-weather-btn5").click(function () {
-          $(".forecast-weather-btn5").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".current-weather-btn5").click(function () {
-          $(".forecast-weather-btn5").toggle();
-          $(".current-weather-btn5").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".forecast-weather-btn6").click(function () {
-          $(".forecast-weather-btn6").toggle();
-        });
-      });
-      $(document).ready(function () {
-        $(".current-weather-btn6").click(function () {
-          $(".forecast-weather-btn6").toggle();
-          $(".current-weather-btn6").toggle();
         });
       });
     </script>
