@@ -8,25 +8,7 @@
     <title>Stargazing Conditions</title>
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon.png" />
-    <!--Background Image-->
-    <style>
-      .Forecast {
-        background-image: url("assets/background-home-desktop.jpg");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position-x: center;
-        background-color: #080b10;
-      }
-      @media screen and (max-width: 750px) {
-        .Forecast {
-          background-image: url("assets/background-home-mobile.jpg");
-          background-size: cover;
-        }
-      }
-      .Forecast-2 {
-        background-color: #080b10;
-      }
-    </style>
+
     <!-- Styles -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -35,10 +17,32 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--Background Image Styles-->
+    <style>
+      .Forecast {
+        background-image: url("assets/background-home-desktop.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        background-position-y: top;
+        height: 1000px;
+      }
+
+      @media screen and (max-width: 750px) {
+        .Forecast {
+          background-image: url("assets/background-home-mobile.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position-x: center;
+          background-position-y: top;
+          background-size: 300%;
+        }
+      }
+    </style>
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -61,13 +65,15 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bellefair&family=Libre+Baskerville&display=swap"
       rel="stylesheet"
     />
+    <script src="js/weather.js"></script>
+    <script src="js/bookmark.js"></script>
   </head>
 
+  <!-- Onload Functions -->
   <body onload="defaultWeather(), bookmarkLoad()">
     <!-- Page Contents -->
-
     <section class="Forecast">
-      <!-- City Search -->
+      <!-- Location Search Input -->
       <div class="search">
         <input
           type="text"
@@ -76,173 +82,192 @@
           class="search-input"
           placeholder="&#128269;  Enter a location..."
         />
-
-        <button id="search-button" class="search-btn">?</button>
       </div>
-      <div>
-        <button onclick="bookmarkAdd(), bookmarkLoad()" id="bookmark">
-          Bookmark
-        </button>
-        <h5>Saved Locations:</h5>
-        <div id="bookmark-out"></div>
+
+      <!-- Location Bookmarking -->
+      <div class="bookmarks">
+        <div style="display: flex">
+          <button
+            class="bookmark-button"
+            onclick="bookmarkAdd(), bookmarkLoad()"
+            id="bookmark"
+          >
+            Save
+          </button>
+          <button
+            class="bookmark-button"
+            onclick="bookmarkClear(), bookmarkLoad()"
+          >
+            Clear All
+          </button>
+        </div>
+        <h5 style="margin-right: 25px">Saved Locations:</h5>
+        <div class="bookmark-scroll">
+          <div id="bookmark-out"></div>
+        </div>
       </div>
 
       <!-- TONIGHT SUMMARY -->
-
       <div>
         <div class="main-summary">
-          <h2 id="">TONIGHT</h2>
-          <!--Geolocation PopUP-->
+          <h5 style="color: white" class="fade-in-one fadeInBottom text-align">
+            Stargazing Conditions
+          </h5>
+          <h2 class="fade-in-two fadeInBottom">TONIGHT</h2>
+
+          <!--Geolocation Disabled PopUp-->
           <div class="popup" id="Geolocation"></div>
-          <h2 class="myDate"></h2>
-          <h4 id="bookmark-add" class="city"></h4>
-          <h4 class="description"></h4>
-          <h4 class="quality"></h4>
-          <h5 class="clouds"></h5>
-          <h5>Moon Phase:</h5>
-          <h5 class="sunset"></h5>
+          <!-- API data outputs -->
+          <h2 class="myDate fade-in-three fadeInBottom"></h2>
+          <h4 id="bookmark-add" class="city fade-in-four fadeInBottom"></h4>
+          <h4 class="description fade-in-four fadeInBottom"></h4>
+          <h4 class="quality fade-in-five fadeInBottom"></h4>
+          <h5 class="rating fade-in-five fadeInBottom"></h5>
+          <h5 class="sunset fade-in-five fadeInBottom"></h5>
+          <h5 class="clouds fade-in-five fadeInBottom"></h5>
+
+          <!-- Tonight Hourly Forecast -->
+          <button
+            id="forecast"
+            class="forecast-weather-btn0 fade-in-six fadeInBottom"
+          >
+            Hourly Forecast
+          </button>
+          <button onclick="animationPrevent();" class="current-weather-btn0">
+            <div class="tonight-forecast">
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+              <div class="forecast-container">
+                <p class="forecast-time"></p>
+                <img class="forecast-icon" />
+                <p class="forecast-clouds"></p>
+              </div>
+            </div>
+          </button>
         </div>
-
-        <button class="forecast-weather-btn0"></button>
-
-        <button class="current-weather-btn0">
-          <div class="tonight-forecast">
-            <!-- <p class="current-description"></p> -->
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-            <div class="forecast-container">
-              <p class="forecast-time"></p>
-              <img class="forecast-icon" />
-              <p class="forecast-clouds"></p>
-            </div>
-          </div>
-        </button>
       </div>
-
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </section>
 
-    <section class="Forecast-2">
-      <!-- Weather Forecast -->
-      <div class="forecast-row">
+    <!-- Coming Days Forecast -->
+    <section class=".Forecast-2">
+      <div class="forecast-row fade-in-six fadeInBottom">
+        <!-- Forecast Day 1 -->
+        <!-- Overview Button -->
         <button class="forecast-weather-btn1">
-          <h4 class="max1">Failed</h4>
-          <p class="min1">Failed</p>
+          <h3 id="day1" style="color: black"></h3>
         </button>
-
+        <!-- Details Button -->
         <button class="current-weather-btn1">
+          <!-- Day Overview -->
           <div class="main-summary">
-            <h2 class="myDate">Loading...</h2>
-            <h4 class="city"></h4>
-            <h4 class="description"></h4>
-            <h4>OVERALL CONDITIONS: W.I.P</h4>
-            <h5 class="clouds"></h5>
-            <h5>Moon Phase:</h5>
-            <h5 class="sunset"></h5>
+            <h2 style="color: black" class="myDate"></h2>
+            <h4 style="color: black" class="description"></h4>
+            <h5 style="color: black" class="clouds"></h5>
+            <h5 style="color: black" class="sunset"></h5>
           </div>
+          <!-- Forecast -->
           <div class="tonight-forecast">
             <div class="forecast-container">
               <p class="forecast-time"></p>
@@ -355,23 +380,19 @@
             </div>
           </div>
         </button>
-
+        <!-- Forecast Day 2 -->
         <button class="forecast-weather-btn2">
-          <img class="forecastIcon2" />
-          <h4 class="max2">Failed</h4>
-          <p class="min2">Failed</p>
+          <h3 id="day2" style="color: black"></h3>
         </button>
         <button class="current-weather-btn2">
+          <!-- Day Overview -->
           <div class="main-summary">
-            <h2 class="myDate">Loading...</h2>
-            <h4 class="city"></h4>
-            <h4 class="description"></h4>
-            <h4>OVERALL CONDITIONS: W.I.P</h4>
-            <h5>Best Time For Stargazing:</h5>
-            <h5 class="clouds"></h5>
-            <h5>Moon Phase:</h5>
-            <h5 class="sunset"></h5>
+            <h2 style="color: black" class="myDate"></h2>
+            <h4 style="color: black" class="description"></h4>
+            <h5 style="color: black" class="clouds"></h5>
+            <h5 style="color: black" class="sunset"></h5>
           </div>
+          <!-- Forecast -->
           <div class="tonight-forecast">
             <div class="forecast-container">
               <p class="forecast-time"></p>
@@ -485,21 +506,17 @@
           </div>
         </button>
         <button class="forecast-weather-btn3">
-          <img class="forecastIcon3" />
-          <h4 class="max3">Failed</h4>
-          <p class="min3">Failed</p>
+          <h3 id="day3" style="color: black"></h3>
         </button>
         <button class="current-weather-btn3">
+          <!-- Day Overview -->
           <div class="main-summary">
-            <h2 class="myDate">Loading...</h2>
-            <h4 class="city"></h4>
-            <h4 class="description"></h4>
-            <h4>OVERALL CONDITIONS: W.I.P</h4>
-            <h5>Best Time For Stargazing:</h5>
-            <h5 class="clouds"></h5>
-            <h5>Moon Phase:</h5>
-            <h5 class="sunset"></h5>
+            <h2 style="color: black" class="myDate"></h2>
+            <h4 style="color: black" class="description"></h4>
+            <h5 style="color: black" class="clouds"></h5>
+            <h5 style="color: black" class="sunset"></h5>
           </div>
+          <!-- Forecast -->
           <div class="tonight-forecast">
             <div class="forecast-container">
               <p class="forecast-time"></p>
@@ -615,15 +632,25 @@
       </div>
     </section>
 
-    <script src="js/weather.js"></script>
-    <script src="js/bookmark.js"></script>
+    <!-- JS/Library import -->
+
+    <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+    <!-- Geolocation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Button Toggle -->
     <script>
+      //Stop Load animation when toggling Button
+      function animationPrevent() {
+        var element = document.getElementById("forecast");
+        element.classList.remove("fade-in-six");
+      }
+
       $(document).ready(function () {
         $(".forecast-weather-btn0").click(function () {
           $(".forecast-weather-btn0").toggle();
@@ -679,6 +706,31 @@
           $(".current-weather-btn3").toggle();
         });
       });
+
+      //Get Date
+      //Get Date for 1 day from now
+      var day1 = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+      var day = day1.getDate();
+      var month = day1.getMonth() + 1;
+      var year = day1.getFullYear();
+      day1 = "<b>" + day + "/" + month + "/" + year + "</b>";
+      document.getElementById("day1").innerHTML = day1;
+
+      //Get Date for 2 days from now
+      var day2 = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
+      var day = day2.getDate();
+      var month = day2.getMonth() + 1;
+      var year = day2.getFullYear();
+      day2 = "<b>" + day + "/" + month + "/" + year + "</b>";
+      document.getElementById("day2").innerHTML = day2;
+
+      //Get Date for 3 Days from now
+      var day3 = new Date(new Date().getTime() + 64 * 60 * 60 * 1000);
+      var day = day3.getDate();
+      var month = day3.getMonth() + 1;
+      var year = day3.getFullYear();
+      day3 = "<b>" + day + "/" + month + "/" + year + "</b>";
+      document.getElementById("day3").innerHTML = day3;
     </script>
   </body>
 </html>
