@@ -191,7 +191,7 @@ function fetchWeather(selectedBookmark, bookmarkSelected){ //Define Function
             const cloudFactor = (100 - clouds) / 100; 
             const humidityFactor = humidity / 100;
             const rainFactor = 1 - (rain / 100);
-            
+
             const quality = Math.max(0, cloudFactor * humidityFactor * rainFactor * 10); 
             const qualityOut = Math.round(quality);
             if (qualityOut == 0 || qualityOut == 1 || qualityOut == 2 || qualityOut == 3){
