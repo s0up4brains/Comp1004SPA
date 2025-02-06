@@ -1,6 +1,4 @@
-# COMP1004SPA
-
-Stargazing Conditions Weather Application
+Stargazing Conditions Weather Application developed for COMP1004
 
 Using Open Weather API, this site provides users with an insight to stargazing conditions in their area, searched location or saved locations.
 
